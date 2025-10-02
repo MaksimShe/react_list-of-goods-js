@@ -16,7 +16,7 @@ export const goodsFromServer = [
   'Garlic',
 ];
 
-const SORTED_BY_LENGTH = 'by lenght';
+const SORTED_BY_LENGTH = 'by length';
 const SORTED_BY_ALPH = 'by alph';
 
 function prepareGoods(goods, { sortedBy, isReversed }) {
@@ -43,8 +43,8 @@ function prepareGoods(goods, { sortedBy, isReversed }) {
 }
 
 export const App = () => {
-  const [sortedBy, sortedBySet] = useState('');
-  const [isReversed, isReversedSet] = useState(false);
+  const [sortedBy, setSortedBy] = useState('');
+  const [isReversed, setIsReversed] = useState(false);
 
   const visibleGoods = prepareGoods(goodsFromServer, { sortedBy, isReversed });
 
@@ -56,7 +56,7 @@ export const App = () => {
           className={cn('button', 'is-info', {
             'is-light': sortedBy !== SORTED_BY_ALPH,
           })}
-          onClick={() => sortedBySet(SORTED_BY_ALPH)}
+          onClick={() => setSortedBy(SORTED_BY_ALPH)}
         >
           Sort alphabetically
         </button>
@@ -66,7 +66,7 @@ export const App = () => {
           className={cn('button', 'is-success', {
             'is-light': sortedBy !== SORTED_BY_LENGTH,
           })}
-          onClick={() => sortedBySet(SORTED_BY_LENGTH)}
+          onClick={() => setSortedBy(SORTED_BY_LENGTH)}
         >
           Sort by length
         </button>
@@ -75,7 +75,7 @@ export const App = () => {
           type="button"
           className={cn('button', 'is-warning', { 'is-light': !isReversed })}
           // eslint-disable-next-line max-len, prettier/prettier
-          onClick={() => isReversed ? isReversedSet(false) : isReversedSet(true)}
+          onClick={() => isReversed ? setIsReversed(false) : setIsReversed(true)}
         >
           Reverse
         </button>
@@ -83,7 +83,10 @@ export const App = () => {
           <button
             type="button"
             className="button is-danger is-light"
-            onClick={() => [sortedBySet(''), isReversedSet(false)]}
+            onClick={() => {
+              setSortedBy('');
+              setIsReversed(false);
+            }}
           >
             Reset
           </button>
