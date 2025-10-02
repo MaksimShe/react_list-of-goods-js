@@ -79,7 +79,7 @@ export const App = () => {
         >
           Reverse
         </button>
-        {(sortedBy || isReversed) && (
+        {visibleGoods.join('|') !== goodsFromServer.join('|') && (
           <button
             type="button"
             className="button is-danger is-light"
